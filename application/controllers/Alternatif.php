@@ -20,6 +20,10 @@ class Alternatif extends CI_Controller {
 			$this->load->view('admin/header');
 		$this->load->view('admin/add_alternatif');
 	}
+	public function save(){
+		$this->Alternatif_model->savedata();
+		
+	} 
 
 	
 }
