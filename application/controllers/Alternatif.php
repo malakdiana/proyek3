@@ -16,6 +16,10 @@ class Alternatif extends CI_Controller {
 		$this->load->view('admin/header');
 		$this->load->view('admin/alternatif',$data);
 	}
+	public function addAlternatif(){
+			$this->load->view('admin/header');
+		$this->load->view('admin/add_alternatif');
+	}
 
 	
 }

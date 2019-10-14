@@ -55,7 +55,7 @@
                                              <td><?php echo $key->kapasitas_produksi ?></td>
                                               <td><?php echo $key->nilai_produksi?></td>
                                                <td><?php echo $key->bahan_baku ?></td>
-                                            <td><button>edit</button><button>delete</button></td>
+                                            <td><a href="" class="btn btn-primary"><i class="fa fa-pencil"></i> </a><a href="" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>
                                         </tr>
                                       <?php } ?>
                                     </tbody>
