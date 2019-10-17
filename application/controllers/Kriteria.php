@@ -57,5 +57,10 @@ class Kriteria extends CI_Controller {
 		echo json_encode($result);
 	}
 
+	public function editBobot(){
+		$this->Kriteria_model->editBobot();
+		redirect('Kriteria/nilai_bobot');
+	}
+
 	
 }

@@ -3,7 +3,8 @@
 
                             <div class="card-header"><strong>Company</strong><small> Form</small></div>
                             <div class="card-body card-block">
-                            <?php echo form_open('Alternatif/save'); ?>   
+                            <?php echo form_open('Alternatif/save'); ?>
+                                <div class="form-group"><label for="alias" class=" form-control-label">Alias</label><input type="text" id="alias" name="alias" placeholder="" class="form-control"></div>
                                     <div class="form-group"><label for="vat" class=" form-control-label">Nama Industri</label><input type="text" id="vat" name="industri" placeholder="" class="form-control"></div>
                                         <div class="form-group"><label for="street" class=" form-control-label">Desa dan Kecamatan</label><input type="text" id="street" name="desa" placeholder="" class="form-control"></div>
                                       

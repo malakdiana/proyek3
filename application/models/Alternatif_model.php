@@ -10,19 +10,19 @@ class Alternatif_model extends CI_Model {
 	}
 
 
-	public function saveData(){
+	public function new(){
 
 		   $d = $this->input->post('investasi');
              $d = str_replace('Rp', '', $d);
               $d = str_replace('.', '', $d);
                $d = str_replace(' ', '', $d);
 
-                $e =$this->input->post('nilaiProduksi');
+                $e =$this->input->post('nilai');
              $e = str_replace('Rp', '', $d);
               $e = str_replace('.', '', $d);
                $e = str_replace(' ', '', $d);
 
-                 $f =$this->input->post('nilaibahan');
+                 $f =$this->input->post('bahan');
              $f = str_replace('Rp', '', $d);
               $f = str_replace('.', '', $d);
                $f = str_replace(' ', '', $d);
@@ -30,15 +30,58 @@ class Alternatif_model extends CI_Model {
 
 		   $data = array(
        
-		'industri' => $this->input->post('industri'),
+		'nama_alternatif_industri' => $this->input->post('alternatif'),
 		'desa' => $this->input->post('desa'),
-		'tenagaKerja' => $this->input->post('tenagaKerja'),
+		'tenaga_kerja' => $this->input->post('tenaga'),
+		'alias' => $this->input->post('alias'),
 		'investasi' => $d,
-		'produksi' => $this->input->post('produksi'),
-		'nilaiProduksi' => $e,
-		'nilaibahan' => $f
+		'kapasitas_produksi' => $this->input->post('kapasitas'),
+		'nilai_produksi' => $e,
+		'bahan_baku' => $f
 	);
 		      $this->db->insert('alternatif', $data);
 
 	}
+
+	public function update(){
+
+		   $d = $this->input->post('investasi');
+             $d = str_replace('Rp', '', $d);
+              $d = str_replace('.', '', $d);
+               $d = str_replace(' ', '', $d);
+
+                $e =$this->input->post('nilai');
+             $e = str_replace('Rp', '', $d);
+              $e = str_replace('.', '', $d);
+               $e = str_replace(' ', '', $d);
+
+                 $f =$this->input->post('bahan');
+             $f = str_replace('Rp', '', $d);
+              $f = str_replace('.', '', $d);
+               $f = str_replace(' ', '', $d);
+
+
+		   $data = array(
+       
+		'nama_alternatif_industri' => $this->input->post('alternatif'),
+		'desa' => $this->input->post('desa'),
+		'tenaga_kerja' => $this->input->post('tenaga'),
+		'alias' => $this->input->post('alias'),
+		'investasi' => $d,
+		'kapasitas_produksi' => $this->input->post('kapasitas'),
+		'nilai_produksi' => $e,
+		'bahan_baku' => $f
+	);
+		    $this->db->where('id_alternatif', $this->input->post('id'));
+        return $this->db->update('alternatif', $data);
+
+	}
+	public function delete($id)
+	{
+        $this->db->where('id_alternatif', $id);
+        $result = $this->db->delete('alternatif');
+        return $result;
+	}
+
+	
 }

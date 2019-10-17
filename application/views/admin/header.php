@@ -54,7 +54,7 @@
                     </li>
                     <h3 class="menu-title">Menu</h3><!-- /.menu-title -->
                     <li class="menu-item-has-children dropdown">
-                        <a  href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Alternatif Industri</a>
+                        <a href="<?php echo site_url() ?>/Alternatif" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Alternatif Industri</a>
                         <ul class="sub-menu children dropdown-menu">
                             <li><i class="fa fa-puzzle-piece"></i><a href="<?php echo site_url() ?>/Alternatif/addAlternatif">Tambah Industri</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="<?php echo site_url() ?>/Alternatif">List Industri</a></li>

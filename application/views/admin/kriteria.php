@@ -41,14 +41,6 @@
                                         </tr>
                                     </thead>
                                     <tbody id="tbkriteria">
-<!--                                        <?php foreach ($kriteria as $key ) { ?>
-                                        <tr>
-                                            <td><?php echo $key->kriteria ?></td>
-                                            <td><?php echo $key->keterangan ?></td>
-                                            <td><?php echo $key->batas_max ?></td>
-                                            <td><button>edit</button><button>delete</button></td>
-                                        </tr>
-                                      <?php } ?> -->
                                     </tbody>
                                 </table>
                             </div>
