@@ -35,47 +35,124 @@
                                     <thead>
                                         <tr>
                                             <th>Kriteria</th>
-                                           <?php foreach ($kriteria as $key) {
+                                           <?php 
+                                           foreach ($kriteria as $key) {
                                             ?>
                                             <th><?php echo $key->keterangan; ?></th>
                                            <?php } ?>
+
                                         </tr>
                                     </thead>
                                     <tbody id="edit">
                                           <?php echo form_open('Kriteria/editBobot'); ?>
                                        <?php 
-
-                                       foreach ($kriteria as $key ) { ?>
+                                    
+                                       foreach ($kriteria as $key ) { 
+                                
+                                        
+                                        ?>
                                         <tr>
-                                            <td><?php echo $key->keterangan ?></td>
+                                            <th><?php echo $key->keterangan ?></th>
                                             <?php  foreach ($kriteria as $data ) {
-                                                foreach ($bobot as $row){ 
-                                                if($row->id_kriteria1 == $key->id_kriteria && $row->id_kriteria2== $data->id_kriteria){
+                                                for($i=0; $i< count($nilai_bobot);$i++){
+
+                                                if($nilai_bobot[$i][0] == $key->id_kriteria && $nilai_bobot[$i][1]== $data->id_kriteria){
+                                                    
                                                 ?>
                                                
                                                       <td>
                                                      
-                                                        <input type="number" name="kriteria1[]" style="width: 50px" value="<?php echo $row->id_kriteria1 ?>" hidden="">
-                                                        <input type="number" name="kriteria2[]" style="width: 50px" value="<?php echo $row->n_kriteria2 ?>" hidden="">
-                                                          <input type="number" name="id_perbandingan[]" style="width: 50px" value="<?php echo $row->id_perbandingan ?>" hidden="" >
+                                                        <input type="number" name="kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][0] ?>" hidden="">
+                                                        <input type="number" name="kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][1] ?>" hidden="">
+                                                          <input type="number" name="id_perbandingan[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][5] ?>" hidden="" >
                                                          <div class="yaya" hidden="">
-                                                        <input type="number" name="n_kriteria1[]" style="width: 50px" value="<?php echo $row->n_kriteria1 ?>" ><input type="text" name="x" value=":" style="width: 30px" disabled="" ><input type="number" name="n_kriteria2[]" style="width: 50px" value="<?php echo $row->n_kriteria2 ?>" >
+                                                        <input type="number" name="n_kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][2] ?>" ><input type="text" name="x" value=":" style="width: 30px" disabled="" ><input type="number" name="n_kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][3] ?>" >
                                                     </div>
-                                                        <div class="yoyo" ><?php echo $row->nilai ?></div>
+                                                        <div class="yoyo" ><?php echo $nilai_bobot[$i][4] ?></div>
                                                             
                                                         </td>
                                                
                                                
                                              
-                                         <?php }}} ?>
+                                         <?php 
+                                        }}} ?>
                                         </tr>
                                       <?php } ?>
+                                      <tr>
+                                          <th>jumlah</th>
+                                          <td><?php echo $jumlah[0]; ?></td>
+                                          <td><?php echo $jumlah[1]; ?></td>
+                                          <td><?php echo $jumlah[2]; ?></td>
+                                          <td><?php echo $jumlah[3]; ?></td>
+                                          <td><?php echo $jumlah[4]; ?></td>
+                                      </tr>
                                     </tbody>
                                 </table>
                                 <button class="btn btn-success" hidden="" id="save" type="submit">Save</button>
                                 <?php echo form_close(); ?>
                             </div>
                         </div>
+                         <div class="card-header">
+                                     
+                                <strong class="card-title">Table Normalisasi Kriteria</strong>
+                            </div>
+                             <div class="card-body">
+                                <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Kriteria</th>
+                                           <?php 
+                                        
+                                           foreach ($kriteria as $key) {
+                                            ?>
+                                            <th><?php echo $key->keterangan; ?></th>
+                                           <?php } ?>
+                                           <th>Rata - Rata</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                         
+                                       <?php 
+                                    $b=0;
+                                       foreach ($kriteria as $key ) { 
+                              
+                                        
+                                        ?>
+                                        <tr>
+                                            <th><?php echo $key->keterangan ?></th>
+                                            <?php  foreach ($kriteria as $data ) {
+                                                for($i=0; $i< count($nilai_bobot);$i++){
+
+                                                if($nilai_bobot[$i][0] == $key->id_kriteria && $nilai_bobot[$i][1]== $data->id_kriteria){
+                                                    
+                                                ?>
+                                               
+                                                      <td>
+                                                     
+                                                        <?php echo $normalisasi[$i][5] ?>
+                                                            
+                                                        </td>
+                                               
+                                               
+                                             
+                                         <?php 
+                                        
+                                         }}} ?>
+                                         <td><?php echo $pw[$b]; ?></td>
+                                        </tr>
+                                      <?php $b++; } ?>
+                                      
+                                    </tbody>
+                                </table>
+                                <table>
+                                    <tr>
+                                        <td><?php echo $vektor[0] ?></td>
+                                    </tr>
+                                </table>
+                               
+                            </div>
+
                     </div>
 
 
