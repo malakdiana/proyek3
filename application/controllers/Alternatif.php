@@ -3,11 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Alternatif extends CI_Controller {
 
-		function __construct()
+	function __construct()
 	{
 		parent::__construct();
 		$this->load->model('Alternatif_model');
-		
+		if ($this->session->userdata('logged_in')==TRUE) 
+		{
+			// redirect('Dc_Controller/index');
+		}else{	
+			redirect('Login');
+		}
 	}
 
 	public function index()

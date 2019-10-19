@@ -7,7 +7,12 @@ class Kriteria extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('Kriteria_model');
-		
+		if ($this->session->userdata('logged_in')==TRUE) 
+		{
+			// redirect('Dc_Controller/index');
+		}else{	
+			redirect('Login');
+		}
 	}
 	public function index()
 	{
