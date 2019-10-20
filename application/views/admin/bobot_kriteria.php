@@ -62,8 +62,8 @@
                                                
                                                       <td>
                                                      
-                                                        <input type="number" name="kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][0] ?>" hidden="">
-                                                        <input type="number" name="kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][1] ?>" hidden="">
+                                                        <input type="number" name="kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][0] ?>" hidden="" >
+                                                        <input type="number" name="kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][1] ?>" hidden="" >
                                                           <input type="number" name="id_perbandingan[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][5] ?>" hidden="" >
                                                          <div class="yaya" hidden="">
                                                         <input type="number" name="n_kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][2] ?>" ><input type="text" name="x" value=":" style="width: 30px" disabled="" ><input type="number" name="n_kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][3] ?>" >
@@ -80,11 +80,14 @@
                                       <?php } ?>
                                       <tr>
                                           <th>jumlah</th>
-                                          <td><?php echo $jumlah[0]; ?></td>
-                                          <td><?php echo $jumlah[1]; ?></td>
-                                          <td><?php echo $jumlah[2]; ?></td>
-                                          <td><?php echo $jumlah[3]; ?></td>
-                                          <td><?php echo $jumlah[4]; ?></td>
+                                          <?php 
+                                    
+                                       foreach ($kriteria as $key ) { 
+                                
+                                        
+                                        ?>
+                                          <td><?php echo $jumlah[$key->id_kriteria]; ?></td>
+                                         <?php } ?>
                                       </tr>
                                     </tbody>
                                 </table>
@@ -92,6 +95,7 @@
                                 <?php echo form_close(); ?>
                             </div>
                         </div>
+
                          <div class="card-header">
                                      
                                 <strong class="card-title">Table Normalisasi Kriteria</strong>
@@ -114,7 +118,7 @@
                                     <tbody >
                                          
                                        <?php 
-                                    $b=0;
+                          
                                        foreach ($kriteria as $key ) { 
                               
                                         
@@ -139,20 +143,61 @@
                                          <?php 
                                         
                                          }}} ?>
-                                         <td><?php echo $pw[$b]; ?></td>
+                                         <td><?php echo $pw[$key->id_kriteria]; ?></td>
                                         </tr>
-                                      <?php $b++; } ?>
+                                      <?php ; } ?>
                                       
                                     </tbody>
                                 </table>
-                                <table>
+                                   </div>
+
+                                 <div class="card-header">
+                                     
+                                <strong class="card-title">Table Konsisten</strong>
+                            </div>
+                             <div class="card-body">
+                                <table class="table table-bordered">
+                                  <tr>
+                                    <th>Kriteria</th>
+                                    <th>Hasil</th>
+                                    <th>Bagi</th>
+
+                                  </tr>
+                                  
+                                  <?php foreach ($kriteria as $key ) {?>
                                     <tr>
-                                        <td><?php echo $vektor[0] ?></td>
+                                       <td><?php echo $key->keterangan; ?></td>
+                                       <td><?php echo $vektor[$key->id_kriteria]; ?></td>
+                                       <td><?php echo $bagi[$key->id_kriteria]; ?></td>
+                                  
                                     </tr>
+                                  <?php } ?>
+
+                                </table>
+                                <table>
+                                  <tr>
+                                    <td>lamda</td>
+                                    <td> <?php echo $lamda; ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>CI</td>
+                                    <td><?php echo $ci ?></td>
+                                  </tr>
+                                  <tr>  
+                                    <td>  RC</td>
+ <td><?php echo $rc; ?></td>
+                                  </tr>
+                                  <tr>  
+                                    <td>  
+                                    konsisten</td>
+
+                                       <td><?php echo $konsisten?></td>
+                                  </tr>
+                                     
                                 </table>
                                
-                            </div>
-
+                               
+                         
                     </div>
 
 
