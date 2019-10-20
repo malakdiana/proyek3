@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Perhitungan extends CI_Controller {
+class Hasil extends CI_Controller {
 
 		function __construct()
 	{
@@ -19,8 +19,86 @@ class Perhitungan extends CI_Controller {
 
 
 public function index(){
+	$this->proses();
+	$this->proses2();
+	$bobot;
+	$alternatif= $this->Alternatif_model->getData();
+	$kriteria=$this->Kriteria_model->getData();
+	foreach ($alternatif as $key ) {
+		$b=0;
+		foreach ($kriteria as $row ) {
+			$query=$this->db->select('eigen')->from('penilaian')->where('id_alternatif',$key->id_alternatif)->where('id_kriteria',$row->id_kriteria)->get()->result();
+			$data=$this->db->select('eigen')->from('kriteria')->where('id_kriteria',$row->id_kriteria)->get()->result();
+			$b+=$query[0]->eigen*$data[0]->eigen;
 
-		$data['kriteria']=$this->Kriteria_model->getdata();
+		}
+		$bobot[$key->id_alternatif]=$b;
+
+	}
+	$this->db->empty_table('hasil');
+	$i=1;
+	foreach ($alternatif as $key ) {
+		$data=array(
+			'id_hasil' => $i,
+			'id_alternatif'=> $key->id_alternatif,
+			'bobot' => $bobot[$key->id_alternatif]
+		);
+		$this->db->insert('hasil',$data);
+$i++;
+	}
+
+}
+public function proses(){
+	$data['kriteria']=$this->Kriteria_model->getdata();
+		$data['bobot']=$this->Kriteria_model->bobot();
+		$data['nilai_bobot']= $this->Kriteria_model->arrayBobot();
+		$jum=[];
+		
+		foreach ($data['kriteria'] as $key) {
+				$b=0;
+			for($i=0;$i<count($data['nilai_bobot']);$i++) {	
+			if($data['nilai_bobot'][$i][1]==  $key->id_kriteria){
+				$b+=$data['nilai_bobot'][$i][4];
+				$jum["$key->id_kriteria"]= $b;
+				}
+			}
+		}
+		$data['jumlah']= $jum;
+		$j=1;$normalisai=1;
+		$normalisaiarray=array();
+		foreach ($data['kriteria'] as $key) {
+			for($i=0;$i<count($data['nilai_bobot']);$i++) {
+			if($data['nilai_bobot'][$i][1]==  $key->id_kriteria){
+				$normalisasi = number_format(($data['nilai_bobot'][$i][4]/$jum[$key->id_kriteria]),2); 
+				array_push($normalisaiarray, array($data['nilai_bobot'][$i][0], $data['nilai_bobot'][$i][1], $data['nilai_bobot'][$i][2],$data['nilai_bobot'][$i][3],$data['nilai_bobot'][$i][4],$normalisasi)); 
+				}
+			}
+		}
+		$data['normalisasi']=$normalisaiarray;
+
+$pw=[];
+		foreach ($data['kriteria'] as $key) {
+			$b=0;
+			for($i=0;$i<count($data['normalisasi']);$i++) {
+			if($data['normalisasi'][$i][0]==  $key->id_kriteria){
+				$b+=$data['normalisasi'][$i][5];
+				$pw[$key->id_kriteria]=$b;
+				}
+			}
+
+			$pw[$key->id_kriteria]= $pw[$key->id_kriteria]/ count($data['kriteria']);
+		}
+		$data['pw']= $pw;
+
+foreach ($data['kriteria'] as $key ) {
+	$this->db->set('eigen', $pw[$key->id_kriteria]);
+$this->db->where('id_kriteria', $key->id_kriteria);
+$this->db->update('kriteria'); 
+}
+}
+
+public function proses2(){
+	$data['kriteria']=$this->Kriteria_model->getdata();
 		$data['alternatif']=$this->Alternatif_model->getdata();
 			$query=$this->db->query("SELECT *  from alternatif ");
 
@@ -132,15 +210,5 @@ foreach ($data['kriteria'] as $key ) {
 	}
 }
 
-	
-		$data['alternatif']=$this->Alternatif_model->getdata();
-$data['jumlah']=$jum;
-		  $data['bobot']=$dataBobot;
-		  $data['normalisasi']=$normalisasi;
-		  $data['pw']=$pw;$data['kali']=$kali;
-	$data['bagi']=$bagi;
-	$data['lamda']=$lamda;$data['ci']=$ci;$data['rc']=$rc;$data['konsisten']=$konsisten;
-		$this->load->view('admin/header');
-		$this->load->view('admin/perhitungan',$data);
-	}
+}
 }

@@ -8,20 +8,43 @@ class Alternatif extends CI_Controller {
 		parent::__construct();
 		$this->load->library('excel');
 		$this->load->model('Alternatif_model');
+				$this->load->model('Kriteria_model');
 		if ($this->session->userdata('logged_in')==TRUE) 
 		{
 			// redirect('Dc_Controller/index');
 		}else{	
 			redirect('Login');
 		}
+
 	}
 
 	public function index()
 	{
 		$data['alternatif']=$this->Alternatif_model->getdata();
-
+		
+		
 		$this->load->view('admin/header');
+		
 		$this->load->view('admin/alternatif',$data);
+
+	}
+
+	public function proses(){
+		$this->db->empty_table('penilaian');
+			$i=1;
+		$data['alternatif']=$this->Alternatif_model->getdata();
+			$data['kriteria']=$this->Kriteria_model->getdata();
+		foreach ($data['kriteria'] as $key ) {
+
+			foreach ($data['alternatif'] as $row ) {
+				$y= array(
+					'id_penilaian' => $i,
+					'id_kriteria' => $key->id_kriteria ,
+					'id_alternatif' => $row->id_alternatif );
+				$this->db->insert('penilaian',$y);
+				$i++;
+			}
+		}
 	}
 	public function getData()
 	{
@@ -41,7 +64,10 @@ class Alternatif extends CI_Controller {
 	{
 		
 		$result = $this->Alternatif_model->new();
+
 		echo json_encode($result);
+			$this->proses();
+		
 	}
 
 	public function update()
@@ -54,7 +80,10 @@ class Alternatif extends CI_Controller {
 	{
 		$id = $this->input->post('id');
 		$result = $this->Alternatif_model->delete($id);
+		
+		
 		echo json_encode($result);
+			$this->proses();
 	}
 
 	public function import()
