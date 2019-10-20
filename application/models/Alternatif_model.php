@@ -83,5 +83,8 @@ class Alternatif_model extends CI_Model {
         return $result;
 	}
 
-	
+	public function import($data)
+	{
+		return $this->db->insert_batch('alternatif',$data);
+	}
 }
