@@ -31,7 +31,7 @@
                                 <strong class="card-title">Table Hasil Akhir</strong>
                             </div>
                             <div class="card-body">
-                                <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <table id="hasil" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Peringkat</th>
@@ -51,7 +51,7 @@
                                           <td><?php echo $key->bobot; ?></td>
                               
                                            
-                                      <tr>
+                                      
                                          
                                          <?php $i++;} ?>
                                       </tr>
@@ -104,13 +104,10 @@
       /*
        * Initialse DataTables, with no sorting on the 'details' column
        */
-       var oTable = $('#data').dataTable({
-        "aoColumnDefs": [{
-          "bSortable": false,
-          "aTargets": [0]
-        }],
-  
-      });
+       $(document).ready(function() {
+        $('#hasil').DataTable();
+      } );
+
 
  
        </script>

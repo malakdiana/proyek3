@@ -31,7 +31,7 @@
                                 <strong class="card-title">Table Hasil Perhitungan</strong>
                             </div>
                             <div class="card-body">
-                                <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
+                                <table id="alternatif" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
                                             <th>Alternatif</th>
@@ -55,8 +55,7 @@
                                             <td><?php echo $pw[$row->kolom][$key->id_alternatif] ?></td>
                                           <?php } ?>
                                            
-                                      <tr>
-                                         
+                                      
                                          <?php } ?>
                                       </tr>
                                     </tbody>
@@ -131,13 +130,9 @@
       /*
        * Initialse DataTables, with no sorting on the 'details' column
        */
-       var oTable = $('#data').dataTable({
-        "aoColumnDefs": [{
-          "bSortable": false,
-          "aTargets": [0]
-        }],
-  
-      });
+      $(document).ready(function() {
+    $('#alternatif').DataTable();
+} );
 
  
        </script>
