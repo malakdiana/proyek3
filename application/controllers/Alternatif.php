@@ -123,6 +123,7 @@ class Alternatif extends CI_Controller {
 			}
 			$result=$this->Alternatif_model->import($data);
 			echo json_encode($result);
+				$this->proses();
 		}
 	}
 }

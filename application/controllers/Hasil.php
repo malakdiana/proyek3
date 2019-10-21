@@ -47,6 +47,12 @@ public function index(){
 $i++;
 	}
 
+	$hasil = $this->db->select('*')->from('hasil')->join('alternatif','alternatif.id_alternatif = hasil.id_alternatif')->order_by('bobot','DESC')->get()->result();
+	$data['hasil']=$hasil;
+
+		$this->load->view('admin/header');
+		$this->load->view('admin/hasil',$data);
+
 }
 public function proses(){
 	$data['kriteria']=$this->Kriteria_model->getdata();

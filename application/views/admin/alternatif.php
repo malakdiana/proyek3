@@ -78,7 +78,7 @@
                             <div class="form-group col-lg-12 row">
                                 <div class="col-12">
                                     <label>Alternatif Industri</label>
-                                    <input type="text" id="alternatif" class="form-control" placeholder="Masukkan Alternatif" style="width: 100%" required>
+                                    <input type="text" id="nama" class="form-control" placeholder="Masukkan Alternatif" style="width: 100%" required>
                                     <label>Desa dan Kecamatan</label>
                                     <input type="text" id="desa" class="form-control" placeholder="Masukkan Desa dan Kecamatan" style="width: 100%" required>
                                     <label>Alias</label>
@@ -303,7 +303,7 @@
         $('#formbaru').submit(function(e){
             e.preventDefault();
                 // memasukkan data inputan ke variabel
-                var alternatif     = $('#alternatif').val();
+                var alternatif     = $('#nama').val();
                 var desa       = $('#desa').val();
                 var alias       = $('#alias').val();
                 var tenaga       = $('#tenaga').val();

@@ -57,22 +57,46 @@ class Kriteria_model extends CI_Model {
 
 	public function editBobot(){
 
-          $id=array();$n_kriteria1=array();$n_kriteria2=array();
-          $id= $this->input->post('id_perbandingan');
-          $n_kriteria1 = $this->input->post('n_kriteria1');
-          $n_kriteria2 = $this->input->post('n_kriteria2');
-           for ($i=0; $i < count($id) ; $i++) { 
-           $nilai = number_format(($n_kriteria1[$i] / $n_kriteria2[$i]),2);
-             $data = array(
-        'n_kriteria1' => $n_kriteria1[$i],
-        'n_kriteria2' => $n_kriteria2[$i],
-        'nilai'=> $nilai);
+ //          $id=array();$n_kriteria1=array();$n_kriteria2=array();
+ //          $id= $this->input->post('id_perbandingan');
+ //          $n_kriteria1 = $this->input->post('n_kriteria1');
+ //          $n_kriteria2 = $this->input->post('n_kriteria2');
+ //           for ($i=0; $i < count($id) ; $i++) { 
+ //           $nilai = number_format(($n_kriteria1[$i] / $n_kriteria2[$i]),2);
+ //             $data = array(
+ //        'n_kriteria1' => $n_kriteria1[$i],
+ //        'n_kriteria2' => $n_kriteria2[$i],
+ //        'nilai'=> $nilai);
           
       
- $this->db->where('id_perbandingan', $id[$i]);
-         $this->db->update('matriks_perbandingan', $data);
+ // $this->db->where('id_perbandingan', $id[$i]);
+ //         $this->db->update('matriks_perbandingan', $data);
 
-           }
+ //           }
+
+    $kriteria1=$this->input->post('kriteria1');
+    $kriteria2=$this->input->post('kriteria2');
+    $perbandingan = $this->input->post('perbandingan');
+    $nilai1=number_format(($perbandingan / 1),2);
+    $nilai2=number_format((1 / $perbandingan),2);
+    $data = array(
+      'id_kriteria1' => $kriteria1,
+      'id_kriteria2' => $kriteria2,
+      'n_kriteria1' => $perbandingan,
+      'n_kriteria2' => 1,
+      'nilai' => $nilai1
+       );
+    $this->db->where('id_kriteria1',$kriteria1)->where('id_kriteria2',$kriteria2)->update('matriks_perbandingan',$data);
+    $datax = array(
+      'id_kriteria1' => $kriteria2,
+      'id_kriteria2' => $kriteria1,
+      'n_kriteria1' => 1,
+      'n_kriteria2' => $perbandingan,
+       'nilai' => $nilai2
+       );
+    $this->db->where('id_kriteria1',$kriteria2)->where('id_kriteria2',$kriteria1)->update('matriks_perbandingan',$datax);
+
+
 
 	}
 }

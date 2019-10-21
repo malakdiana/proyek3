@@ -27,35 +27,9 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                   
+                                     <div class="pull-right"><a href="javascript:void(0);" class="btn btn-success float-right" id="btn-edit"><span class="fa fa-plus" ></span>Update</a></div>
                                 <strong class="card-title">Table Kriteria</strong>
-                                    <?php echo form_open('Kriteria/editBobot'); ?>
-                                  <div class="row">
-                                  
-                                      <select id="kriteria1"  name="kriteria1" class="form-control" style="width: 180px" >
-                                      <?php foreach ($kriteria as $key): ?>
-                                        <option value="<?php echo $key->id_kriteria ?>"><?php echo $key->keterangan; ?></option>
-                                      <?php endforeach ?>
-                                      </select>&nbsp;&nbsp;&nbsp;
-                                      <select id="perbandingan"name="perbandingan" class="form-control"style="width: 320px" >
-                                        <option value="1">1- Sama penting dengan</option>
-                                        <option value="2">2- Mendekati sedikit lebih penting dari</option>
-                                        <option value="3">3- Sedikit lebih penting dari</option>
-                                        <option value="4">4- Mendekati lebih penting dari</option>
-                                        <option value="5">5- Lebih penting dari</option>
-                                        <option value="6">6- Mendekati sangat penting dari</option>
-                                        <option value="7">7- Sangat penting dari</option>
-                                        <option value="8">8- Mendekati mutlak dari</option>
-                                        <option value="9">9- Mutlak sangat penting dari</option>
-                                      </select>&nbsp;&nbsp;&nbsp;
-                                       <select id="kriteria2"  name="kriteria2" class="form-control" style="width: 180px">
-                                      <?php foreach ($kriteria as $key): ?>
-                                        <option value="<?php echo $key->id_kriteria ?>"><?php echo $key->keterangan; ?></option>
-                                      <?php endforeach ?>
-                                      </select>&nbsp;&nbsp;&nbsp;
-                                      <button class="btn btn-success float-right" ><span class="fa fa-plus" ></span>Update</button></div>
-                                 
-                            </div>       <?php echo form_close(); ?>
+                            </div>
                             <div class="card-body">
                                 <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
@@ -70,7 +44,7 @@
                                         </tr>
                                     </thead>
                                     <tbody id="edit">
-                                          
+                                          <?php echo form_open('Kriteria/editBobot'); ?>
                                        <?php 
                                     
                                        foreach ($kriteria as $key ) { 
@@ -87,7 +61,14 @@
                                                 ?>
                                                
                                                       <td>
-                                                        <?php echo $nilai_bobot[$i][4] ?>
+                                                     
+                                                        <input type="number" name="kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][0] ?>" hidden="" >
+                                                        <input type="number" name="kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][1] ?>" hidden="" >
+                                                          <input type="number" name="id_perbandingan[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][5] ?>" hidden="" >
+                                                         <div class="yaya" hidden="">
+                                                        <input type="number" name="n_kriteria1[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][2] ?>" ><input type="text" name="x" value=":" style="width: 30px" disabled="" ><input type="number" name="n_kriteria2[]" style="width: 50px" value="<?php echo $nilai_bobot[$i][3] ?>" >
+                                                    </div>
+                                                        <div class="yoyo" ><?php echo $nilai_bobot[$i][4] ?></div>
                                                             
                                                         </td>
                                                
@@ -111,7 +92,7 @@
                                     </tbody>
                                 </table>
                                 <button class="btn btn-success" hidden="" id="save" type="submit">Save</button>
-                               
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
 
@@ -178,8 +159,8 @@
                                 <table class="table table-bordered">
                                   <tr>
                                     <th>Kriteria</th>
-                                    <th>Perkalian</th>
-                                    <th>Pembagian</th>
+                                    <th>Hasil</th>
+                                    <th>Bagi</th>
 
                                   </tr>
                                   
@@ -193,7 +174,7 @@
                                   <?php } ?>
 
                                 </table>
-                                <table class="table table-striped" style="width: 300px">
+                                <table>
                                   <tr>
                                     <td>lamda</td>
                                     <td> <?php echo $lamda; ?></td>
@@ -211,12 +192,6 @@
                                     konsisten</td>
 
                                        <td><?php echo $konsisten?></td>
-                                  </tr>
-                                  <tr>  
-                                    <td>  
-                                    Keterangan Konsisten</td>
-
-                                       <td><?php if($konsisten<0.1){echo "konsisten";}else{echo "tidak konsisten";}?></td>
                                   </tr>
                                      
                                 </table>
@@ -279,7 +254,24 @@
  
        </script>
        <script>
- 
+    $(document).ready(function(){ // Ketika halaman sudah diload dan siap
+      
+        $("#btn-edit").click(function(){ 
+        var x = document.getElementsByClassName("yoyo");
+            var i;
+for (i = 0; i < x.length; i++) {
+  x[i].setAttribute('hidden',true);
+}
+         var b = document.getElementsByClassName("yaya");
+            var j;
+        for (j = 0; j < b.length; j++) {
+        b[j].removeAttribute('hidden');
+        }
+
+        document.getElementById("save").removeAttribute('hidden');  
+        document.getElementById("btn-edit").setAttribute('hidden',true);  
+        });
+    });
     </script>
 
 </body>

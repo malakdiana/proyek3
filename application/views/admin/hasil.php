@@ -3,7 +3,7 @@
             <div class="col-sm-4">
                 <div class="page-header float-left">
                     <div class="page-title">
-                        <h1>Perhitungan</h1>
+                        <h1>Hasil</h1>
                     </div>
                 </div>
             </div>
@@ -11,7 +11,7 @@
                 <div class="page-header float-right">
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
-                            <li><a href="#">Perhitungan</a></li>
+                            <li><a href="#">Hasil</a></li>
                             <li><a href="#">Table</a></li>
                             <li class="active">Data table</li>
                         </ol>
@@ -28,36 +28,32 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Table Hasil Perhitungan</strong>
+                                <strong class="card-title">Table Hasil Akhir</strong>
                             </div>
                             <div class="card-body">
                                 <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Alternatif</th>
-                                           <?php 
-                                           foreach ($kriteria as $key) {
-                                            ?>
-                                            <th><?php echo $key->keterangan; ?></th>
-                                           <?php } ?>
-
+                                            <th>Peringkat</th>
+                                          <th>Nama Industri</th>
+                                          <th>Bobot Evaluasi</th>
                                         </tr>
                                     </thead>
                                     <tbody id="edit">
                                        
                                        <?php 
-                                    
-                                       foreach ($alternatif as $key ) { 
+                                    $i=1;
+                                       foreach ($hasil as $key ) { 
                                         ?>
                                         <tr>
-                                            <th><?php echo $key->nama_alternatif_industri?></th>
-                                            <?php foreach ($kriteria as $row) {?>
-                                            <td><?php echo $pw[$row->kolom][$key->id_alternatif] ?></td>
-                                          <?php } ?>
+                                          <td><?php echo $i ?></td>
+                                          <td><?php echo $key->nama_alternatif_industri ?></td>
+                                          <td><?php echo $key->bobot; ?></td>
+                              
                                            
                                       <tr>
                                          
-                                         <?php } ?>
+                                         <?php $i++;} ?>
                                       </tr>
                                     </tbody>
                                 </table>
@@ -65,30 +61,7 @@
     
                             </div>
                         </div>
-                         <div class="card-header">
-                                <strong class="card-title">Data Konsistensi</strong>
-                            </div>
-                            <table id="data bootstrap-data-table-export" class="table table-striped table-bordered">
-                                    <thead>
-                                      <th>Kriteria</th>
-                                      <th>Nilai</th>
-                                      <th>Keterangan</th>
-                                    </thead>
-                                    <tbody>
-                                      <?php foreach ($kriteria as $key ) { ?>
-                                        <tr>
-                                          <td><?php echo $key->keterangan; ?></td>
-                                          <td><?php echo $konsisten[$key->kolom]; ?></td>
-                                          <td><?php if($konsisten[$key->kolom]<0.1){echo "konsisten";}else{echo "tidak";} ?></td>
-                                        </tr>
-                                      <?php } ?>
-                                    </tbody>
-
-                        
-                               
-                         
-                
-
+  
                 </div>
             </div><!-- .animated -->
         </div><!-- .content -->
