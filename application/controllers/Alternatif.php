@@ -26,6 +26,7 @@ class Alternatif extends CI_Controller {
 		$this->load->view('admin/header');
 		
 		$this->load->view('admin/alternatif',$data);
+		$this->proses();
 
 	}
 
@@ -123,7 +124,7 @@ class Alternatif extends CI_Controller {
 			}
 			$result=$this->Alternatif_model->import($data);
 			echo json_encode($result);
-				$this->proses();
+
 		}
 	}
 }

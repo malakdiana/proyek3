@@ -103,6 +103,15 @@ $this->db->update('kriteria');
 }
 }
 
+public function grafik(){
+$data['alternatif']= $this->db->select('*')->from('hasil')->join('alternatif','alternatif.id_alternatif= hasil.id_alternatif')->order_by('bobot','desc')->limit(3)->get()->result();
+$data['nilai']=$this->db->query('SELECT *, penilaian.eigen as hasil FROM `penilaian` join kriteria on kriteria.id_kriteria=penilaian.id_kriteria')->result();
+$this->load->view('admin/header');
+		$this->load->view('admin/home',$data);
+
+
+}
+
 public function proses2(){
 	$data['kriteria']=$this->Kriteria_model->getdata();
 		$data['alternatif']=$this->Alternatif_model->getdata();
